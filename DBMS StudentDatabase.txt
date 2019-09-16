@@ -1,0 +1,103 @@
+CREATE DATABASE	StudentManagementSystem;
+USE StudentManagementSystem;
+
+CREATE	TABLE Student(
+stu_id int;
+stu_first_name varchar(50) NOT NULL;
+stu_second_name varchar(50) NOT NULL;
+stu_email varchar(50) NOT NULL;
+stu_mobile int NOT NULL;
+stu_add varchar(50) NOT NULL;
+PRIMARY KEY(stu_id);
+)
+
+INSERT INTO Student('1','Abhishek','Kumar','ak47@gmail.com','76230','India');
+INSERT INTO Student('2','Abhishikt','Augustine','augustine@gmail.com','465987','India');
+INSERT INTO Student('3','Meban','Teidor','manik@gmail.com','65465','India');
+INSERT INTO Student('4','Pritosh','Bhai','pritosh@cdac.com','05245','India');
+INSERT INTO Student('5','Santa','Claus','reindeer@snow.com','2512','North Pole',);
+
+CREATE TABLE Course(
+crs_id int NOT NULL;
+crs_name varchar(40) NOT NULL;
+crs_desc varchar(100) NOT NULL;
+crs_duration varchar(40) NOT NULL;
+PRIMARY KEY(crs_id);
+FOREIGN KEY (stu_id) REFERENCES Student(stu_id);
+)
+
+INSERT INTO Course('100','Chemistry','Involves chemicals','4 Years');
+INSERT INTO Course('101','Physics','Space and Time','3 Years');
+INSERT INTO Course('102','Maths','Solving Problems','3 Years');
+INSERT INTO Course('103','Law','Cases','3 Years');
+INSERT INTO Course('104','MBA','Management','2 Years');
+
+CREATE TABLE Faculty(
+fac_id int NOT NULL;
+fac_name varchar(40) NOT NULL;
+fac_desc varchar(100) NOT NULL;
+PRIMARY KEY(fac_id);
+FOREIGN KEY(crs_id) REFERENCES Course(crs_id);
+)
+
+INSERT INTO Faculty('999','Marie Curie','Won a Nobel Prize');
+INSERT INTO Faculty('998','C V Raman','Won a Nobel Prize');
+INSERT INTO Faculty('997','Srinivasa Ramanujan','Fellow of the Royal Society');
+INSERT INTO Faculty('996','Mr. Law','Teaches Lzw');
+INSERT INTO Faculty('995','Mr. CEO','Does Business');
+
+CREATE TABLE Exam(
+exam_id int NOT NULL;
+exam_type vachar(40) NOT NULL;
+exam_batch varchar(40) NOT NULL;
+exam_date date NOT NULL;
+PRIMARY KEY(exam_id);
+FOREIGN KEY(fac_id) REFERENCES Faculty(fac_id);
+)
+
+INSERT INTO Exam('345','Online','Batch 1','2019-11-1');
+INSERT INTO Exam('346','Offline','Batch 2','2019-11-2');
+INSERT INTO Exam('347','Online','Batch 1','2019-11-3');
+INSERT INTO Exam('348','Offline','Batch 2','2019-11-4');
+INSERT INTO Exam('349','Online','Batch 1','2019-11-5');
+
+CREATE TABLE Login(
+log_user_name varchar(40) NOT NULL;
+log_password varchar(40) NOT NULL;
+PRIMARY KEY (log_user_name);
+FOREIGN KEY (log_user_name) REFERENCES Student(log_user_name);
+)
+
+INSERT INTO Login('qwe','123');
+INSERT INTO Login('wer','234');
+INSERT INTO Login('ert','345');
+INSERT INTO Login('rty','456');
+INSERT INTO Login('tyu','567');
+
+CREATE TABLE Fees(
+fee_id int NOT NULL;
+fee_type varchar(40) NOT NULL;
+fee_amt int NOT NULL;
+fee_date date NOT NULL;
+PRIMARY KEY(fee_id);
+FOREIGN KEY (crs_id) REFERENCES Course (crs_id);
+)
+
+INSERT INTO Fees('001','Cash','20000','2019-12-10');
+INSERT INTO Fees('002','NetBanking','21000','2019-12-11');
+INSERT INTO Fees('003','Cheque','25000','2019-12-12');
+INSERT INTO Fees('004','Paytm','56000','2019-12-13');
+INSERT INTO Fees('005','BhimUpi','1000000','2019-12-14');
+
+CREATE TABLE Clubs(
+club_name varchar(40) NOT NULL;
+club_desc varchar(40) NOT NULL;
+PRIMARY KEY(club_name);
+FOREIGN KEY(stu_id) REFERENCES Student(stu_id);
+)
+
+INSERT INTO Clubs('Computer Club','Teach Code');
+INSERT INTO Clubs('Cricket Club','Plays Cricket');
+INSERT INTO Clubs('Football Club','Plays Football');
+INSERT INTO Clubs('Computer Gaming','Plays Computer Games');
+INSERT INTO Clubs('Books','Read Books');
