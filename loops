@@ -16,3 +16,22 @@ WHILE DO-
           Select strng;
           End /
           Delimiter ; 
+REPEAT -
+	Delimiter /
+	Create procedure show_batch_repeat()
+	Begin
+	Declare a int;
+	Declare strng varchar(200);
+
+	set a = 1;
+	set strng = '';
+	Repeat
+	set strng = concat(strng,a,',');
+	set a=a+1;
+	until a =6
+	End REPEAT;
+
+	Select strng;
+	End /
+
+	Delimiter ; 
