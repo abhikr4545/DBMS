@@ -1,0 +1,13 @@
+Delimiter &
+	CREATE TRIGGER chk_update BEFORE UPDATE ON FEES
+	FOR EACH ROW
+	BEGIN
+	DECLARE errormsg varchar(100);
+	SET errormsg=concat('Wrong Input'," ",new.fee_amt);
+	IF new.fee_amt < old.fee_amt THEN
+	SIGNAL SQLSTATE '45000'
+	SET MESSAGE_TEXT = errormsg;
+	END IF;
+	END &
+	DELIMITER ;
+
