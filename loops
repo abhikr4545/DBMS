@@ -1,0 +1,18 @@
+WHILE DO-
+          Delimiter /
+          Create procedure show_batch()
+          Begin
+          Declare a int;
+          Declare strng varchar(200);
+          Declare name varchar(200);
+          set a = 345;
+          set strng = '';
+          set name='';
+          While (a <=349) do
+          select exam_batch into name from exam where exam_id = a ;
+	        set strng = concat(strng,name,',');
+	        set a =a+1;
+          End While;
+          Select strng;
+          End /
+          Delimiter ; 
