@@ -73,3 +73,15 @@ Trigger 4-
 	insert into show_fees(fees) values(old.fee_amt);
 	end//
 	delimiter ;
+
+Trigger 5-
+	DELIMITER #
+	CREATE trigger ins_check before insert 
+	on fees for each row 
+	begin
+	IF new.fee_amt<50000  then
+	SIGNAL SQLSTATE '93288'
+	SET MESSAGE_TEXT = 'WRONG INPUT';
+	END IF;
+	END #
+	delimiter ;
