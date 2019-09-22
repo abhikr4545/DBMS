@@ -43,11 +43,33 @@ Trigger 2-
  
 	DELIMITER ;
 
-
-
-
 	INSERT INTO members(name, email, birthDate)
 	VALUES
     	('Abhishek Kumar', 'ab@example.com', NULL),
     	('AUGUTINE', 'BHAAS_KI@TANG.com','2000-01-01');
 
+	
+	
+Trigger 3-	
+	DELIMITER $$
+ 
+	CREATE TRIGGER before_student_delete
+	BEFORE DELETE
+	ON Student FOR EACH ROW
+	BEGIN
+    	INSERT INTO StudentArchives(FirstName,SecondName,email)
+    	VALUES(OLD.stu_first_name,OLD.stu_second_name,OLD.stu_email);
+	END$$    
+ 
+	DELIMITER ;
+
+Trigger 4-
+	create table show_fees(
+     fees int not null );
+
+	DELIMITER //
+	CREATE trigger avg after delete on fees for each row
+	begin
+	insert into show_fees(fees) values(old.fee_amt);
+	end//
+	delimiter ;
